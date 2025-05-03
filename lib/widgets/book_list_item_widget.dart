@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:ybooks/models/book.dart'; // Assuming Book model exists
+import 'package:ybooks/utils/client/http_books.dart'; // Import HttpBooks
+import 'dart:typed_data'; // Import Uint8List
 
 class BookListItemWidget extends StatelessWidget {
   final Book book;
@@ -16,11 +18,41 @@ class BookListItemWidget extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             // Placeholder for book cover image
-            Container(
-              width: 80,
-              height: 120,
-              color: Colors.grey[300], // Placeholder color
-              // TODO: Replace with actual Image.network or Image.asset based on book data
+            FutureBuilder<Uint8List?>(
+              future: HttpBooks.getBookCoverImage(book.id.toString()), // Assuming book has an 'id' property
+              builder: (context, snapshot) {
+                if (snapshot.connectionState == ConnectionState.waiting) {
+                  return Container(
+                    width: 80,
+                    height: 120,
+                    color: Colors.grey[300], // Placeholder color
+                    child: const Center(child: CircularProgressIndicator()),
+                  );
+                } else if (snapshot.hasError) {
+                  print('Error loading book cover for ${book.title}: ${snapshot.error}');
+                  return Container(
+                    width: 80,
+                    height: 120,
+                    color: Colors.grey[300], // Placeholder color
+                    child: const Center(child: Icon(Icons.error)),
+                  );
+                } else if (snapshot.hasData && snapshot.data != null) {
+                  return Image.memory(
+                    snapshot.data!,
+                    width: 80,
+                    height: 120,
+                    fit: BoxFit.cover, // Adjust as needed
+                  );
+                } else {
+                  // No data (e.g., 404 from API)
+                  return Container(
+                    width: 80,
+                    height: 120,
+                    color: Colors.grey[300], // Placeholder color
+                    child: const Center(child: Icon(Icons.book)), // Generic book icon
+                  );
+                }
+              },
             ),
             const SizedBox(width: 16.0),
             Expanded(
@@ -45,20 +77,53 @@ class BookListItemWidget extends StatelessWidget {
                       color: Colors.grey[600],
                     ),
                   ),
-                  // const SizedBox(height: 8.0), // Removed extra space
                    Expanded( // Wrap description in Expanded to take remaining space in column
-                     child: Align( // Align description to the bottom
-                       alignment: Alignment.bottomLeft,
-                       child: Text(
-                         book.description ?? '', // Assuming description is a property
-                         style: const TextStyle(
-                           fontSize: 14.0,
-                         ),
-                         maxLines: 3,
-                         overflow: TextOverflow.ellipsis,
-                       ),
-                     ),
+                    child: Align( // Align description to the bottom
+                      alignment: Alignment.bottomLeft,
+                      child: Text(
+                        book.description ?? '', // Assuming description is a property
+                        style: const TextStyle(
+                          fontSize: 14.0,
+                        ),
+                        maxLines: 3,
+                        overflow: TextOverflow.ellipsis,
+                      ),
+                    ),
                    ),
+                  const SizedBox(height: 8.0),
+                  Row(
+                    children: [
+                      Icon(Icons.remove_red_eye, size: 16.0, color: Colors.grey[600]),
+                      const SizedBox(width: 4.0),
+                      Text(
+                        book.readCount.toString(),
+                        style: TextStyle(
+                          fontSize: 14.0,
+                          color: Colors.grey[600],
+                        ),
+                      ),
+                      const SizedBox(width: 16.0),
+                      Icon(Icons.favorite_border, size: 16.0, color: Colors.grey[600]),
+                      const SizedBox(width: 4.0),
+                      Text(
+                        book.likeCount.toString(),
+                        style: TextStyle(
+                          fontSize: 14.0,
+                          color: Colors.grey[600],
+                        ),
+                      ),
+                      const SizedBox(width: 16.0),
+                      Icon(Icons.bookmark_border, size: 16.0, color: Colors.grey[600]),
+                      const SizedBox(width: 4.0),
+                      Text(
+                        book.collectCount.toString(),
+                        style: TextStyle(
+                          fontSize: 14.0,
+                          color: Colors.grey[600],
+                        ),
+                      ),
+                    ],
+                  ),
                   // TODO: Add more details like view count, categories, etc.
                 ],
               ),
@@ -68,4 +133,17 @@ class BookListItemWidget extends StatelessWidget {
       ),
     );
   }
+}
+
+class BookListItemDivider extends StatelessWidget {
+ const BookListItemDivider({Key? key}) : super(key: key);
+
+ @override
+ Widget build(BuildContext context) {
+   return const Divider(
+     height: 1.0,
+     color: Colors.black, // Changed color to black
+     thickness: 1.0, // Increased thickness
+   );
+ }
 }

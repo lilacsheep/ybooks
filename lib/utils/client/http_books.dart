@@ -1,6 +1,8 @@
 import 'package:dio/dio.dart'; // For MultipartFile
 import '../../models/book.dart'; // Import the shared Book model
 import 'http_core.dart'; // Import HttpCore
+import 'http_storage.dart'; // Import HttpStorage
+import 'dart:typed_data'; // Import Uint8List
 
 class HttpBooks {
   static Future<dynamic> createBook({
@@ -181,17 +183,43 @@ class HttpBooks {
   }
 
   // 获取书籍封面分享链接
-  static Future<String> getBookCoverUrl(String bookId) async {
+  static Future<Uint8List?> getBookCoverImage(String bookId) async {
     try {
+      // 1. 尝试从缓存获取
+      final cachedImage = await HttpStorage.getCachedBookImage(bookId);
+      if (cachedImage != null) {
+        print('从缓存加载书籍封面: $bookId');
+        return cachedImage;
+      }
+
+      // 2. 缓存中没有，从 API 获取封面 URL
       final response = await HttpCore.get('/books/$bookId/cover');
 
-      // 假设响应结构为 { "data": "cover_image_share_link_url" }
+      // 假设响应结构为 { "data": { "cover_url": "cover_image_share_link_url" } }
       if (response is Map<String, dynamic> && response.containsKey('data')) {
         final dynamic dataField = response['data'];
         if (dataField is Map<String, dynamic> && dataField.containsKey('cover_url')) {
           final dynamic coverUrlField = dataField['cover_url'];
           if (coverUrlField is String && coverUrlField.isNotEmpty) {
-            return coverUrlField;
+            final String coverUrl = coverUrlField;
+
+            // 3. 从 URL 下载图片数据
+            // 使用 HttpCore.get 下载原始字节数据
+            final imageResponse = await HttpCore.get(
+              coverUrl,
+              options: Options(responseType: ResponseType.bytes), // 指定响应类型为字节
+            );
+
+            if (imageResponse is Uint8List) {
+              // 4. 缓存图片数据
+              await HttpStorage.cacheBookImage(bookId, imageResponse);
+              print('缓存并加载书籍封面: $bookId');
+              return imageResponse;
+            } else {
+              print('API Error: Expected image response to be Uint8List, but got ${imageResponse.runtimeType}');
+              throw Exception('获取书籍封面失败：下载图片数据格式不正确');
+            }
+
           } else {
             print('API Error: Expected "data.cover_url" field to be a non-empty string, but got ${coverUrlField.runtimeType}');
             throw Exception('获取书籍封面失败：响应数据格式不正确 (data.cover_url is not a string)');
@@ -204,8 +232,17 @@ class HttpBooks {
         print('API Error: Expected response for book cover URL to be a Map with a "data" key, but got: $response');
         throw Exception('获取书籍封面失败：响应数据格式不正确 (missing data key or not a Map)');
       }
+    } on DioException catch (e) {
+       print('DioError fetching book cover image for ID $bookId: ${e.message}');
+       // 对于 404 错误，可能只是书籍没有封面，返回 null 即可
+       if (e.response?.statusCode == 404) {
+         print('Book cover not found for ID $bookId');
+         return null;
+       }
+       // 其他 Dio 错误重新抛出
+       rethrow;
     } catch (e) {
-      print('Error fetching book cover URL for ID $bookId: $e');
+      print('Error fetching book cover image for ID $bookId: $e');
       rethrow; // 重新抛出异常
     }
   }

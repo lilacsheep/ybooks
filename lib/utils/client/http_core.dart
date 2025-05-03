@@ -171,9 +171,9 @@ class HttpCore {
   }
 
   // Convert generic GET, POST, PUT, DELETE methods to use the _dio instance
-  static Future<dynamic> get(String uri) async {
+  static Future<dynamic> get(String uri, {Options? options}) async {
     try {
-      final response = await _dio.get(uri);
+      final response = await _dio.get(uri, options: options);
       return _handleResponse(response);
     } on DioException catch (e) {
       print('Error in GET $uri: $e');

@@ -16,6 +16,10 @@ class BottomAppBarWidget extends StatelessWidget {
     return BottomNavigationBar(
       currentIndex: currentIndex,
       onTap: onTap,
+      selectedItemColor: Colors.red,
+      unselectedItemColor: Colors.black,
+      selectedLabelStyle: const TextStyle(fontWeight: FontWeight.bold),
+      unselectedLabelStyle: const TextStyle(fontWeight: FontWeight.normal),
       items: const [
         BottomNavigationBarItem(
           icon: Icon(Icons.home),

@@ -29,11 +29,172 @@ class _SettingsPageState extends State<SettingsPage> with SingleTickerProviderSt
       body: CustomScrollView(
         slivers: [
           SliverAppBar(
-            expandedHeight: 250.0,
+            expandedHeight: 350.0, // Increased height to accommodate user info
             flexibleSpace: FlexibleSpaceBar(
-              background: Image.asset(
-                'images/background.png', // Placeholder for background image
-                fit: BoxFit.cover,
+              background: Stack( // Use Stack to layer background and user info
+                children: [
+                  Positioned.fill(
+                    child: Image.asset(
+                      'images/background.png', // Placeholder for background image
+                      fit: BoxFit.cover,
+                    ),
+                  ),
+                  Positioned.fill( // Add a black overlay
+                    child: Container(
+                      color: Colors.black.withOpacity(0.2),
+                    ),
+                  ),
+                  Positioned( // Position the user info at the bottom left
+                    left: 0,
+                    right: 0,
+                    bottom: 0,
+                    child: Padding(
+                      padding: const EdgeInsets.all(16.0),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Row(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              CircleAvatar(
+                                radius: 40,
+                                backgroundImage: AssetImage('images/avatar.png'), // Placeholder for avatar
+                              ),
+                              const SizedBox(width: 16.0),
+                              Expanded(
+                                child: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    const Text(
+                                      '胖大施', // Placeholder for username
+                                      style: TextStyle(
+                                        fontSize: 24.0,
+                                        fontWeight: FontWeight.bold,
+                                        color: Colors.white,
+                                      ),
+                                    ),
+                                    const SizedBox(height: 4.0),
+                                    Row(
+                                      children: [
+                                        const Text(
+                                          '小红书号: 11659947204', // Placeholder for ID
+                                          style: TextStyle(
+                                            fontSize: 14.0,
+                                            color: Colors.white,
+                                          ),
+                                        ),
+                                        const Icon(Icons.copy, size: 14.0, color: Colors.white),
+                                      ],
+                                    ),
+                                    const SizedBox(height: 4.0),
+                                    Row(
+                                      children: [
+                                        const Text(
+                                          'IP属地: 上海', // Placeholder for IP location
+                                          style: TextStyle(
+                                            fontSize: 14.0,
+                                            color: Colors.white,
+                                          ),
+                                        ),
+                                        const Icon(Icons.info_outline, size: 14.0, color: Colors.white),
+                                      ],
+                                    ),
+                                  ],
+                                ),
+                              ),
+                            ],
+                          ),
+                          const SizedBox(height: 16.0),
+                          const Text(
+                            '养生命理爱好者', // Placeholder for bio
+                            style: TextStyle(
+                              fontSize: 16.0,
+                              color: Colors.white,
+                            ),
+                          ),
+                          const SizedBox(height: 16.0),
+                          Row(
+                            children: [
+                              Container(
+                                padding: const EdgeInsets.symmetric(horizontal: 8.0, vertical: 4.0),
+                                decoration: BoxDecoration(
+                                  color: Colors.white.withOpacity(0.3),
+                                  borderRadius: BorderRadius.circular(4.0),
+                                ),
+                                child: const Text('36岁', style: TextStyle(color: Colors.white)), // Placeholder for age
+                              ),
+                              const SizedBox(width: 8.0),
+                              Container(
+                                padding: const EdgeInsets.symmetric(horizontal: 8.0, vertical: 4.0),
+                                decoration: BoxDecoration(
+                                  color: Colors.white.withOpacity(0.3),
+                                  borderRadius: BorderRadius.circular(4.0),
+                                ),
+                                child: const Text('上海杨浦', style: TextStyle(color: Colors.white)), // Placeholder for location
+                              ),
+                            ],
+                          ),
+                          const SizedBox(height: 16.0),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceAround, // Change to spaceAround for equal spacing
+                            children: [
+                              Column(
+                                children: const [
+                                  Text(
+                                    '10', // Placeholder for followers
+                                    style: TextStyle(
+                                      fontSize: 18.0,
+                                      fontWeight: FontWeight.bold,
+                                      color: Colors.white,
+                                    ),
+                                  ),
+                                  Text(
+                                    '关注',
+                                    style: TextStyle(
+                                      fontSize: 12.0, // Smaller font size
+                                      color: Colors.white,
+                                    ),
+                                  ),
+                                ],
+                              ),
+                              Column(
+                                children: const [
+                                  Text(
+                                    '113', // Placeholder for likes and collections
+                                    style: TextStyle(
+                                      fontSize: 18.0,
+                                      fontWeight: FontWeight.bold,
+                                      color: Colors.white,
+                                    ),
+                                  ),
+                                  Text(
+                                    '获赞与收藏',
+                                    style: TextStyle(
+                                      fontSize: 12.0, // Smaller font size
+                                      color: Colors.white,
+                                    ),
+                                  ),
+                                ]),
+                              // Remove the SizedBox spacer
+                              OutlinedButton( // Removed SizedBox
+                                style: OutlinedButton.styleFrom(
+                                  foregroundColor: Colors.white,
+                                  backgroundColor: Colors.grey[800]!.withOpacity(0.3), // 30% opacity
+                                  side: const BorderSide(color: Colors.white), // White border
+                                ),
+                                onPressed: () {
+                                  // TODO: Implement edit profile action
+                                },
+                                child: const Text('编辑资料'),
+                              ),
+                            ],
+                          ),
+                          const SizedBox(height: 16.0),
+                        ],
+                      ),
+                    ),
+                  ),
+                ],
               ),
             ),
             leading: IconButton(
@@ -43,185 +204,7 @@ class _SettingsPageState extends State<SettingsPage> with SingleTickerProviderSt
               },
             ),
             actions: [
-              IconButton(
-                icon: const Icon(Icons.qr_code_scanner, color: Colors.white),
-                onPressed: () {
-                  // TODO: Implement QR code action
-                },
-              ),
-              IconButton(
-                icon: const Icon(Icons.share, color: Colors.white),
-                onPressed: () {
-                  // TODO: Implement share action
-                },
-              ),
             ],
-          ),
-          SliverToBoxAdapter(
-            child: Padding(
-              padding: const EdgeInsets.all(16.0),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Row(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      CircleAvatar(
-                        radius: 40,
-                        backgroundImage: AssetImage('images/avatar.png'), // Placeholder for avatar
-                      ),
-                      const SizedBox(width: 16.0),
-                      Expanded(
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            const Text(
-                              '胖大施', // Placeholder for username
-                              style: TextStyle(
-                                fontSize: 24.0,
-                                fontWeight: FontWeight.bold,
-                              ),
-                            ),
-                            const SizedBox(height: 4.0),
-                            Row(
-                              children: [
-                                const Text(
-                                  '小红书号: 11659947204', // Placeholder for ID
-                                  style: TextStyle(
-                                    fontSize: 14.0,
-                                    color: Colors.grey,
-                                  ),
-                                ),
-                                const Icon(Icons.copy, size: 14.0, color: Colors.grey),
-                              ],
-                            ),
-                            const SizedBox(height: 4.0),
-                            Row(
-                              children: [
-                                const Text(
-                                  'IP属地: 上海', // Placeholder for IP location
-                                  style: TextStyle(
-                                    fontSize: 14.0,
-                                    color: Colors.grey,
-                                  ),
-                                ),
-                                const Icon(Icons.info_outline, size: 14.0, color: Colors.grey),
-                              ],
-                            ),
-                          ],
-                        ),
-                      ),
-                    ],
-                  ),
-                  const SizedBox(height: 16.0),
-                  const Text(
-                    '养生命理爱好者', // Placeholder for bio
-                    style: TextStyle(
-                      fontSize: 16.0,
-                    ),
-                  ),
-                  const SizedBox(height: 16.0),
-                  Row(
-                    children: [
-                      Container(
-                        padding: const EdgeInsets.symmetric(horizontal: 8.0, vertical: 4.0),
-                        decoration: BoxDecoration(
-                          color: Colors.grey[300],
-                          borderRadius: BorderRadius.circular(4.0),
-                        ),
-                        child: const Text('36岁'), // Placeholder for age
-                      ),
-                      const SizedBox(width: 8.0),
-                      Container(
-                        padding: const EdgeInsets.symmetric(horizontal: 8.0, vertical: 4.0),
-                        decoration: BoxDecoration(
-                          color: Colors.grey[300],
-                          borderRadius: BorderRadius.circular(4.0),
-                        ),
-                        child: const Text('上海杨浦'), // Placeholder for location
-                      ),
-                    ],
-                  ),
-                  const SizedBox(height: 16.0),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Column(
-                        children: const [
-                          Text(
-                            '10', // Placeholder for followers
-                            style: TextStyle(
-                              fontSize: 18.0,
-                              fontWeight: FontWeight.bold,
-                            ),
-                          ),
-                          Text(
-                            '关注',
-                            style: TextStyle(
-                              fontSize: 14.0,
-                              color: Colors.grey,
-                            ),
-                          ),
-                        ],
-                      ),
-                      Column(
-                        children: const [
-                          Text(
-                            '54', // Placeholder for following
-                            style: TextStyle(
-                              fontSize: 18.0,
-                              fontWeight: FontWeight.bold,
-                            ),
-                          ),
-                          Text(
-                            '粉丝',
-                            style: TextStyle(
-                              fontSize: 14.0,
-                              color: Colors.grey,
-                            ),
-                          ),
-                        ],
-                      ),
-                      Column(
-                        children: const [
-                          Text(
-                            '113', // Placeholder for likes and collections
-                            style: TextStyle(
-                              fontSize: 18.0,
-                              fontWeight: FontWeight.bold,
-                            ),
-                          ),
-                          Text(
-                            '获赞与收藏',
-                            style: TextStyle(
-                              fontSize: 14.0,
-                              color: Colors.grey,
-                            ),
-                          ),
-                        ],
-                      ),
-                      const SizedBox(width: 32.0), // Spacer
-                      Expanded(
-                        child: OutlinedButton(
-                          onPressed: () {
-                            // TODO: Implement edit profile action
-                          },
-                          child: const Text('编辑资料'),
-                        ),
-                      ),
-                      const SizedBox(width: 8.0),
-                      IconButton(
-                        icon: const Icon(Icons.settings_outlined),
-                        onPressed: () {
-                          // TODO: Implement settings action
-                        },
-                      ),
-                    ],
-                  ),
-                  const SizedBox(height: 16.0),
-                ],
-              ),
-            ),
           ),
           SliverPersistentHeader(
             delegate: _SliverAppBarDelegate(

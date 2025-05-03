@@ -23,25 +23,34 @@ class BookListView extends StatefulWidget {
 class _BookListViewState extends State<BookListView> {
   @override
   Widget build(BuildContext context) {
-    return ListView.builder(
-      controller: widget.scrollController, // Assign the scroll controller
-      itemCount: widget.books.length + (widget.hasMore ? 1 : 0), // Add 1 for loading indicator or end message
-      itemBuilder: (context, index) {
-        if (index < widget.books.length) {
-          final book = widget.books[index];
-          return BookListItemWidget(book: book);
-        } else {
-          // This is the loading indicator or end of list message
-          return Padding(
-            padding: const EdgeInsets.symmetric(vertical: 16.0),
-            child: Center(
-              child: widget.isLoading
-                  ? const CircularProgressIndicator()
-                  : const Text('没有更多数据了'), // Or any other end-of-list message
-            ),
-          );
-        }
-      },
+    return Column(
+      children: [
+        Expanded(
+          child: ListView.separated(
+            controller: widget.scrollController, // Assign the scroll controller
+            itemCount: widget.books.length + (widget.isLoading || !widget.hasMore ? 1 : 0),
+            itemBuilder: (context, index) {
+              if (index < widget.books.length) {
+                final book = widget.books[index];
+                return BookListItemWidget(book: book);
+              } else {
+                // This is the last item, show loading or end message
+                return Padding(
+                  padding: const EdgeInsets.symmetric(vertical: 16.0),
+                  child: Center(
+                    child: widget.isLoading
+                        ? const CircularProgressIndicator()
+                        : const Text('没有更多数据了'),
+                  ),
+                );
+              }
+            },
+            separatorBuilder: (context, index) {
+              return const BookListItemDivider();
+            },
+          ),
+        ),
+      ],
     );
   }
 }

@@ -12,14 +12,17 @@ class BookListItemWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 8.0),
-      child: SizedBox( // Use SizedBox to give the item a fixed height
+      child: SizedBox(
+        // Use SizedBox to give the item a fixed height
         height: 120, // Set height similar to the image placeholder
         child: Row(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             // Placeholder for book cover image
             FutureBuilder<Uint8List?>(
-              future: HttpBooks.getBookCoverImage(book.id.toString()), // Assuming book has an 'id' property
+              future: HttpBooks.getBookCoverImage(
+                book.id.toString(),
+              ), // Assuming book has an 'id' property
               builder: (context, snapshot) {
                 if (snapshot.connectionState == ConnectionState.waiting) {
                   return Container(
@@ -29,7 +32,9 @@ class BookListItemWidget extends StatelessWidget {
                     child: const Center(child: CircularProgressIndicator()),
                   );
                 } else if (snapshot.hasError) {
-                  print('Error loading book cover for ${book.title}: ${snapshot.error}');
+                  print(
+                    'Error loading book cover for ${book.title}: ${snapshot.error}',
+                  );
                   return Container(
                     width: 80,
                     height: 120,
@@ -49,7 +54,9 @@ class BookListItemWidget extends StatelessWidget {
                     width: 80,
                     height: 120,
                     color: Colors.grey[300], // Placeholder color
-                    child: const Center(child: Icon(Icons.book)), // Generic book icon
+                    child: const Center(
+                      child: Icon(Icons.book),
+                    ), // Generic book icon
                   );
                 }
               },
@@ -72,28 +79,30 @@ class BookListItemWidget extends StatelessWidget {
                   const SizedBox(height: 4.0),
                   Text(
                     book.author, // Assuming author is a property in Book model
-                    style: TextStyle(
-                      fontSize: 14.0,
-                      color: Colors.grey[600],
-                    ),
+                    style: TextStyle(fontSize: 14.0, color: Colors.grey[600]),
                   ),
-                   Expanded( // Wrap description in Expanded to take remaining space in column
-                    child: Align( // Align description to the bottom
+                  Expanded(
+                    // Wrap description in Expanded to take remaining space in column
+                    child: Align(
+                      // Align description to the bottom
                       alignment: Alignment.bottomLeft,
                       child: Text(
-                        book.description ?? '', // Assuming description is a property
-                        style: const TextStyle(
-                          fontSize: 14.0,
-                        ),
+                        book.description ??
+                            '', // Assuming description is a property
+                        style: const TextStyle(fontSize: 14.0),
                         maxLines: 3,
                         overflow: TextOverflow.ellipsis,
                       ),
                     ),
-                   ),
+                  ),
                   const SizedBox(height: 8.0),
                   Row(
                     children: [
-                      Icon(Icons.remove_red_eye, size: 16.0, color: Colors.grey[600]),
+                      Icon(
+                        Icons.remove_red_eye,
+                        size: 16.0,
+                        color: Colors.grey[600],
+                      ),
                       const SizedBox(width: 4.0),
                       Text(
                         book.readCount.toString(),
@@ -103,7 +112,11 @@ class BookListItemWidget extends StatelessWidget {
                         ),
                       ),
                       const SizedBox(width: 16.0),
-                      Icon(Icons.favorite_border, size: 16.0, color: Colors.grey[600]),
+                      Icon(
+                        Icons.favorite_border,
+                        size: 16.0,
+                        color: Colors.grey[600],
+                      ),
                       const SizedBox(width: 4.0),
                       Text(
                         book.likeCount.toString(),
@@ -113,7 +126,11 @@ class BookListItemWidget extends StatelessWidget {
                         ),
                       ),
                       const SizedBox(width: 16.0),
-                      Icon(Icons.bookmark_border, size: 16.0, color: Colors.grey[600]),
+                      Icon(
+                        Icons.bookmark_border,
+                        size: 16.0,
+                        color: Colors.grey[600],
+                      ),
                       const SizedBox(width: 4.0),
                       Text(
                         book.collectCount.toString(),
@@ -136,14 +153,14 @@ class BookListItemWidget extends StatelessWidget {
 }
 
 class BookListItemDivider extends StatelessWidget {
- const BookListItemDivider({Key? key}) : super(key: key);
+  const BookListItemDivider({Key? key}) : super(key: key);
 
- @override
- Widget build(BuildContext context) {
-   return const Divider(
-     height: 1.0,
-     color: Colors.black, // Changed color to black
-     thickness: 1.0, // Increased thickness
-   );
- }
+  @override
+  Widget build(BuildContext context) {
+    return const Divider(
+      height: 0.3,
+      color: const Color(0xFFE0E0E0), // Changed color to lighter grey (grey[300])
+      thickness: 0.5, // Decreased thickness
+    );
+  }
 }

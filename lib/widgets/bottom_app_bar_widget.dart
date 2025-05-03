@@ -15,7 +15,14 @@ class BottomAppBarWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return BottomNavigationBar(
       currentIndex: currentIndex,
-      onTap: onTap,
+      onTap: (index) {
+        if (index == 2) {
+          // Navigate to settings page
+          Navigator.pushNamed(context, '/settings');
+        } else {
+          onTap(index);
+        }
+      },
       selectedItemColor: Colors.red,
       unselectedItemColor: Colors.black,
       selectedLabelStyle: const TextStyle(fontWeight: FontWeight.bold),

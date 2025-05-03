@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:ybooks/pages/home_page.dart'; // Import HomePage
+import 'package:ybooks/pages/user/settings.dart'; // Import SettingsPage
 import 'package:ybooks/utils/client/http_core.dart'; // Import HttpCore
 
 final GlobalKey<NavigatorState> navigatorKey =
@@ -23,6 +24,9 @@ class MyApp extends StatelessWidget {
         colorScheme: const ColorScheme.light(surface: Colors.white),
       ),
       home: const HomePage(), // Set HomePage as the home
+      routes: {
+        '/settings': (context) => const SettingsPage(), // Define the settings route
+      },
     );
   }
 }

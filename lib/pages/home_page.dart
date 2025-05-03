@@ -36,7 +36,10 @@ class _HomePageState extends State<HomePage> {
                 ),
                 filled: true,
                 fillColor: Colors.grey[200], // Light grey color
-                contentPadding: const EdgeInsets.symmetric(horizontal: 20.0, vertical: 0), // Adjust padding
+                contentPadding: const EdgeInsets.symmetric(
+                  horizontal: 20.0,
+                  vertical: 0,
+                ), // Adjust padding
               ),
             ),
           ),
@@ -50,7 +53,9 @@ class _HomePageState extends State<HomePage> {
           ), // Add the CategoryListWidget here
           Expanded(
             child: Center(
-              child: Text('当前选中索引: $_currentIndex, 选中的分类索引: $_selectedCategoryIndex'), // Placeholder body content
+              child: Text(
+                '当前选中索引: $_currentIndex, 选中的分类索引: $_selectedCategoryIndex',
+              ), // Placeholder body content
             ),
           ),
         ],
@@ -58,21 +63,6 @@ class _HomePageState extends State<HomePage> {
       bottomNavigationBar: BottomAppBarWidget(
         currentIndex: _currentIndex,
         onTap: _onTap,
-      ),
-    );
-  }
-
-  Widget _buildCategoryTab(String title) {
-    return Container(
-      padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 8.0),
-      margin: const EdgeInsets.symmetric(horizontal: 4.0),
-      decoration: BoxDecoration(
-        color: Colors.blue, // Placeholder color
-        borderRadius: BorderRadius.circular(20.0),
-      ),
-      child: Text(
-        title,
-        style: const TextStyle(color: Colors.white),
       ),
     );
   }

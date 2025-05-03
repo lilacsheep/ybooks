@@ -11,6 +11,7 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
   int _currentIndex = 0;
+  int _selectedCategoryIndex = 0; // Add selected category index
 
   void _onTap(int index) {
     setState(() {
@@ -39,10 +40,17 @@ class _HomePageState extends State<HomePage> {
               ),
             ),
           ),
-          CategoryListWidget(), // Add the CategoryListWidget here
+          CategoryListWidget(
+            selectedIndex: _selectedCategoryIndex,
+            onCategorySelected: (index) {
+              setState(() {
+                _selectedCategoryIndex = index;
+              });
+            },
+          ), // Add the CategoryListWidget here
           Expanded(
             child: Center(
-              child: Text('当前选中索引: $_currentIndex'), // Placeholder body content
+              child: Text('当前选中索引: $_currentIndex, 选中的分类索引: $_selectedCategoryIndex'), // Placeholder body content
             ),
           ),
         ],

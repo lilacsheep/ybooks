@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:ybooks/widgets/bottom_app_bar_widget.dart';
+import 'package:ybooks/widgets/category_list_widget.dart'; // Import the new widget
 
 class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);
@@ -38,6 +39,7 @@ class _HomePageState extends State<HomePage> {
               ),
             ),
           ),
+          CategoryListWidget(), // Add the CategoryListWidget here
           Expanded(
             child: Center(
               child: Text('当前选中索引: $_currentIndex'), // Placeholder body content

@@ -8,7 +8,7 @@ import 'package:ybooks/utils/client/http_books.dart'; // Import HttpBooks
 import 'package:ybooks/models/page_info.dart'; // Import PageInfo model
 
 class HomePage extends StatefulWidget {
-  const HomePage({Key? key}) : super(key: key);
+  const HomePage({super.key});
 
   @override
   _HomePageState createState() => _HomePageState();
@@ -18,7 +18,7 @@ class _HomePageState extends State<HomePage> {
   int _currentIndex = 0;
   int _selectedCategoryIndex = 0; // Add selected category index
 
-  List<Book> _books = []; // List to hold fetched books
+  final List<Book> _books = []; // List to hold fetched books
   int _currentPage = 1; // Current page number for pagination
   bool _isLoading = false; // Flag to indicate if data is being loaded
   bool _hasMore = true; // Flag to indicate if there are more pages to load

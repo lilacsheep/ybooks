@@ -115,11 +115,20 @@ class _BookDetailPageState extends State<BookDetailPage> {
                                               child: const Center(child: Icon(Icons.error)),
                                             );
                                           } else if (snapshot.hasData && snapshot.data != null) {
-                                            return Image.memory(
-                                              snapshot.data!,
+                                            return Container(
                                               width: MediaQuery.of(context).size.width * 0.6,
                                               height: MediaQuery.of(context).size.width * 0.6 * 1.5,
-                                              fit: BoxFit.cover,
+                                              decoration: BoxDecoration(
+                                                borderRadius: BorderRadius.circular(8.0), // 圆角半径
+                                                border: Border.all(color: Colors.grey[300]!, width: 1.0), // 淡灰色描边
+                                              ),
+                                              child: ClipRRect(
+                                                borderRadius: BorderRadius.circular(8.0), // 应用圆角到图片本身
+                                                child: Image.memory(
+                                                  snapshot.data!,
+                                                  fit: BoxFit.cover,
+                                                ),
+                                              ),
                                             );
                                           } else {
                                             return Container(
@@ -260,11 +269,20 @@ class _BookDetailPageState extends State<BookDetailPage> {
                                               child: const Center(child: Icon(Icons.error)),
                                             );
                                           } else if (snapshot.hasData && snapshot.data != null) {
-                                            return Image.memory(
-                                              snapshot.data!,
+                                            return Container(
                                               width: MediaQuery.of(context).size.width * 0.6,
                                               height: MediaQuery.of(context).size.width * 0.6 * 1.5,
-                                              fit: BoxFit.cover,
+                                              decoration: BoxDecoration(
+                                                borderRadius: BorderRadius.circular(8.0), // 圆角半径
+                                                border: Border.all(color: Colors.grey[300]!, width: 1.0), // 淡灰色描边
+                                              ),
+                                              child: ClipRRect(
+                                                borderRadius: BorderRadius.circular(8.0), // 应用圆角到图片本身
+                                                child: Image.memory(
+                                                  snapshot.data!,
+                                                  fit: BoxFit.cover,
+                                                ),
+                                              ),
                                             );
                                           } else {
                                             return Container(
@@ -408,11 +426,20 @@ class _BookDetailPageState extends State<BookDetailPage> {
                                               child: const Center(child: Icon(Icons.error)),
                                             );
                                           } else if (snapshot.hasData && snapshot.data != null) {
-                                            return Image.memory(
-                                              snapshot.data!,
+                                            return Container(
                                               width: MediaQuery.of(context).size.width * 0.6,
                                               height: MediaQuery.of(context).size.width * 0.6 * 1.5,
-                                              fit: BoxFit.cover,
+                                              decoration: BoxDecoration(
+                                                borderRadius: BorderRadius.circular(8.0), // 圆角半径
+                                                border: Border.all(color: Colors.grey[300]!, width: 1.0), // 淡灰色描边
+                                              ),
+                                              child: ClipRRect(
+                                                borderRadius: BorderRadius.circular(8.0), // 应用圆角到图片本身
+                                                child: Image.memory(
+                                                  snapshot.data!,
+                                                  fit: BoxFit.cover,
+                                                ),
+                                              ),
                                             );
                                           } else {
                                             return Container(
@@ -554,11 +581,20 @@ class _BookDetailPageState extends State<BookDetailPage> {
                                               child: const Center(child: Icon(Icons.error)),
                                             );
                                           } else if (snapshot.hasData && snapshot.data != null) {
-                                            return Image.memory(
-                                              snapshot.data!,
+                                            return Container(
                                               width: MediaQuery.of(context).size.width * 0.6,
                                               height: MediaQuery.of(context).size.width * 0.6 * 1.5,
-                                              fit: BoxFit.cover,
+                                              decoration: BoxDecoration(
+                                                borderRadius: BorderRadius.circular(8.0), // 圆角半径
+                                                border: Border.all(color: Colors.grey[300]!, width: 1.0), // 淡灰色描边
+                                              ),
+                                              child: ClipRRect(
+                                                borderRadius: BorderRadius.circular(8.0), // 应用圆角到图片本身
+                                                child: Image.memory(
+                                                  snapshot.data!,
+                                                  fit: BoxFit.cover,
+                                                ),
+                                              ),
                                             );
                                           } else {
                                             return Container(

@@ -135,50 +135,28 @@ class HttpBooks {
     }
   }
 
-  // 根据 ID 获取书籍详情 (FIXED)
-  static Future<Book> getBookById(String bookId) async {
+  // 根据 ID 获取书籍详情
+  // 返回完整的响应数据 Map，以便获取 page_count 等额外信息
+  static Future<Map<String, dynamic>> getBookById(String bookId) async {
     try {
       // 调用通用的 get 方法，它会处理 token 和基础 URL，并调用 _handleResponse
       final response = await HttpCore.get('/books/$bookId'); // API 端点
 
       // _handleResponse 成功时会返回解析后的 Map<String, dynamic>
-      // 检查返回的数据结构是否符合预期 { "data": { "book": { ... } } }
-      if (response is Map<String, dynamic> && response.containsKey('data')) {
-        final dynamic dataField = response['data'];
-
-        if (dataField is Map<String, dynamic> && dataField.containsKey('book')) {
-          final dynamic bookData = dataField['book'];
-
-          if (bookData is Map<String, dynamic>) {
-            try {
-              // 将嵌套的 bookData Map 转换为 Book 对象
-              return Book.fromJson(bookData);
-            } catch (e) {
-               print('Error parsing nested book detail from JSON: $bookData, Error: $e');
-              throw Exception('获取书籍详情失败：响应数据解析错误 (nested book)');
-            }
-          } else {
-             // data['book'] 不是 Map
-             print('API Error: Expected "data.book" field to be a Map, but got ${bookData.runtimeType}');
-            throw Exception('获取书籍详情失败：响应数据格式不正确 (data.book is not a Map)');
-          }
-        } else {
-          // data 字段不是 Map 或不包含 'book' 键
-          print('API Error: Expected "data" to be a Map containing "book", but got ${dataField.runtimeType} or missing key');
-          throw Exception('获取书籍详情失败：响应数据格式不正确 (data format or missing book key)');
-        }
+      // 我们直接返回这个解析后的 Map，调用方再根据需要解析 data 字段
+      if (response is Map<String, dynamic>) {
+        return response;
       } else {
-        // _handleResponse 没有返回预期的 Map 结构，或者缺少 'data' 键
-        print('API Error: Expected response for book detail to be a Map with a "data" key, but got: $response');
-        throw Exception('获取书籍详情失败：响应数据格式不正确 (missing data key or not a Map)');
+        // 理论上不应该走到这里
+        print('API Error: HttpCore.get did not return a Map.');
+        throw Exception('获取书籍详情失败：内部错误，响应数据格式异常');
       }
+
     } catch (e) {
-      // 捕获 HttpCore.get 或 _handleResponse 或本方法内部抛出的异常
-      print('Error fetching book detail for ID $bookId: $e');
-      // 重新抛出异常，以便 UI 层可以捕获并显示错误
-      // 可以考虑包装异常提供更多上下文
-      // rethrow;
-      throw Exception('获取书籍详情失败: $e');
+      // 捕获 HttpCore.get 或 _handleResponse 抛出的异常
+      print('Error fetching book detail: $e');
+      // 重新抛出异常，以便调用方可以处理
+      rethrow;
     }
   }
 

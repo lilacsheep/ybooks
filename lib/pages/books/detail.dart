@@ -7,6 +7,8 @@ import 'package:ybooks/utils/client/http_read_status.dart'; // Import HttpReadSt
 import 'package:ybooks/widgets/books/detail_buttons/start_reading_button.dart'; // Import StartReadingButton
 import 'package:ybooks/widgets/books/detail_buttons/subscribe_button.dart'; // Import SubscribeButton
 
+import 'package:ybooks/widgets/books/book_stats_widget.dart';
+
 class BookDetailPage extends StatefulWidget {
   final Book book;
 
@@ -164,36 +166,10 @@ class _BookDetailPageState extends State<BookDetailPage> {
                                 ),
                                 SizedBox(height: 24.0),
                                 // Display Like, Share, Read Counts and Total Pages with Icons
-                                Row(
-                                  mainAxisAlignment: MainAxisAlignment.spaceAround, // Distribute space evenly
-                                  children: [
-                                    // Like Count
-                                    Row(
-                                      children: [
-                                        Icon(Icons.thumb_up, color: Colors.grey), // Example icon for like
-                                        SizedBox(width: 4.0),
-                                        Text('${bookDetail.likeCount}'),
-                                      ],
-                                    ),
-                                    // Read Count
-                                    Row(
-                                      children: [
-                                        Icon(Icons.remove_red_eye, color: Colors.grey), // Example icon for read
-                                        SizedBox(width: 4.0),
-                                        Text('${bookDetail.readCount}'),
-                                      ],
-                                    ),
-                                    // Total Pages
-                                    Row(
-                                      children: [
-                                        Icon(Icons.description, color: Colors.grey), // Example icon for pages
-                                        SizedBox(width: 4.0),
-                                        Text('${totalPageCount}页'), // Display total pages
-                                      ],
-                                    ),
-                                    // Note: Share count is not directly available in the provided JSON structure,
-                                    // so it's not included here.
-                                  ],
+                                BookStatsWidget(
+                                  likeCount: bookDetail.likeCount,
+                                  readCount: bookDetail.readCount,
+                                  totalPageCount: totalPageCount,
                                 ),
                                 SizedBox(height: 16.0),
                                 // Full Introduction (Complete Description)
@@ -335,36 +311,10 @@ class _BookDetailPageState extends State<BookDetailPage> {
                                 ),
                                 SizedBox(height: 24.0),
                                 // Display Like, Share, Read Counts and Total Pages with Icons
-                                Row(
-                                  mainAxisAlignment: MainAxisAlignment.spaceAround, // Distribute space evenly
-                                  children: [
-                                    // Like Count
-                                    Row(
-                                      children: [
-                                        Icon(Icons.thumb_up, color: Colors.grey), // Example icon for like
-                                        SizedBox(width: 4.0),
-                                        Text('${bookDetail.likeCount}'),
-                                      ],
-                                    ),
-                                    // Read Count
-                                    Row(
-                                      children: [
-                                        Icon(Icons.remove_red_eye, color: Colors.grey), // Example icon for read
-                                        SizedBox(width: 4.0),
-                                        Text('${bookDetail.readCount}'),
-                                      ],
-                                    ),
-                                    // Total Pages
-                                    Row(
-                                      children: [
-                                        Icon(Icons.description, color: Colors.grey), // Example icon for pages
-                                        SizedBox(width: 4.0),
-                                        Text('${totalPageCount}页'), // Display total pages
-                                      ],
-                                    ),
-                                    // Note: Share count is not directly available in the provided JSON structure,
-                                    // so it's not included here.
-                                  ],
+                                BookStatsWidget(
+                                  likeCount: bookDetail.likeCount,
+                                  readCount: bookDetail.readCount,
+                                  totalPageCount: totalPageCount,
                                 ),
                                 SizedBox(height: 16.0),
                                 // Full Introduction (Complete Description)
@@ -509,36 +459,10 @@ class _BookDetailPageState extends State<BookDetailPage> {
                                 ),
                                 SizedBox(height: 24.0),
                                 // Display Like, Share, Read Counts and Total Pages with Icons
-                                Row(
-                                  mainAxisAlignment: MainAxisAlignment.spaceAround, // Distribute space evenly
-                                  children: [
-                                    // Like Count
-                                    Row(
-                                      children: [
-                                        Icon(Icons.thumb_up, color: Colors.grey), // Example icon for like
-                                        SizedBox(width: 4.0),
-                                        Text('${bookDetail.likeCount}'),
-                                      ],
-                                    ),
-                                    // Read Count
-                                    Row(
-                                      children: [
-                                        Icon(Icons.remove_red_eye, color: Colors.grey), // Example icon for read
-                                        SizedBox(width: 4.0),
-                                        Text('${bookDetail.readCount}'),
-                                      ],
-                                    ),
-                                    // Total Pages
-                                    Row(
-                                      children: [
-                                        Icon(Icons.description, color: Colors.grey), // Example icon for pages
-                                        SizedBox(width: 4.0),
-                                        Text('${totalPageCount}页'), // Display total pages
-                                      ],
-                                    ),
-                                    // Note: Share count is not directly available in the provided JSON structure,
-                                    // so it's not included here.
-                                  ],
+                                BookStatsWidget(
+                                  likeCount: bookDetail.likeCount,
+                                  readCount: bookDetail.readCount,
+                                  totalPageCount: totalPageCount,
                                 ),
                                 SizedBox(height: 16.0),
                                 // Full Introduction (Complete Description)
@@ -681,36 +605,10 @@ class _BookDetailPageState extends State<BookDetailPage> {
                                 ),
                                 SizedBox(height: 24.0),
                                 // Display Like, Share, Read Counts and Total Pages with Icons
-                                Row(
-                                  mainAxisAlignment: MainAxisAlignment.spaceAround, // Distribute space evenly
-                                  children: [
-                                    // Like Count
-                                    Row(
-                                      children: [
-                                        Icon(Icons.thumb_up, color: Colors.grey), // Example icon for like
-                                        SizedBox(width: 4.0),
-                                        Text('${bookDetail.likeCount}'),
-                                      ],
-                                    ),
-                                    // Read Count
-                                    Row(
-                                      children: [
-                                        Icon(Icons.remove_red_eye, color: Colors.grey), // Example icon for read
-                                        SizedBox(width: 4.0),
-                                        Text('${bookDetail.readCount}'),
-                                      ],
-                                    ),
-                                    // Total Pages
-                                    Row(
-                                      children: [
-                                        Icon(Icons.description, color: Colors.grey), // Example icon for pages
-                                        SizedBox(width: 4.0),
-                                        Text('${totalPageCount}页'), // Display total pages
-                                      ],
-                                    ),
-                                    // Note: Share count is not directly available in the provided JSON structure,
-                                    // so it's not included here.
-                                  ],
+                                BookStatsWidget(
+                                  likeCount: bookDetail.likeCount,
+                                  readCount: bookDetail.readCount,
+                                  totalPageCount: totalPageCount,
                                 ),
                                 SizedBox(height: 16.0),
                                 // Full Introduction (Complete Description)

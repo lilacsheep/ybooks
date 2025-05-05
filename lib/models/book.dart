@@ -11,11 +11,20 @@ class Book {
   final int readCount; // 阅读数量
   final int likeCount; // 点赞数量
   final int collectCount; // 收藏数量
-  final String? tags; // 标签，以逗号分隔
+  final List<String>? tags; // 标签列表
   final bool shared; // 是否共享
   final int score; // 评分
   final int pageCount; // PDF文件页面数量用于统计进度使用
   final int processCount; // 已处理页面数量
+  final String? category; // 分类
+  final int wordCount; // 字数
+  final int popularity; // 七日人气
+  final double retentionRate; // 留存率
+  final int rank; // 排行榜名次
+  final String? latestChapter; // 最新章节
+  final String? updateTime; // 更新时间
+  final int reviewCount; // 评论数量
+  final bool isSubscribed; // 是否已追更
   final int? category1Id; // 一级分类ID
   final int? category2Id; // 二级分类ID
   final int? category3Id; // 三级分类ID
@@ -49,6 +58,15 @@ class Book {
     required this.readingOrder,
     this.createUserId,
     required this.offlineAt,
+    this.category,
+    required this.wordCount,
+    required this.popularity,
+    required this.retentionRate,
+    required this.rank,
+    this.latestChapter,
+    this.updateTime,
+    required this.reviewCount,
+    required this.isSubscribed,
   });
 
   // Factory constructor to create a Book from JSON
@@ -66,7 +84,7 @@ class Book {
       readCount: json['read_count'] as int? ?? 0,
       likeCount: json['like_count'] as int? ?? 0,
       collectCount: json['collect_count'] as int? ?? 0,
-      tags: json['tags'] as String?,
+      tags: (json['tags'] as String?)?.split(','), // 将逗号分隔的字符串转换为 List<String>
       shared: json['shared'] as bool? ?? false,
       score: json['score'] as int? ?? 0,
       pageCount: json['page_count'] as int? ?? 0,
@@ -79,6 +97,15 @@ class Book {
       readingOrder: json['reading_order'] as int? ?? 0, // Ensure key matches API
       createUserId: json['create_user_id'] as int?,
       offlineAt: json['offline_at'] as int? ?? 0, // Using int for int64
+      category: json['category'] as String?,
+      wordCount: json['word_count'] as int? ?? 0,
+      popularity: json['popularity'] as int? ?? 0,
+      retentionRate: (json['retention_rate'] as num?)?.toDouble() ?? 0.0,
+      rank: json['rank'] as int? ?? 0,
+      latestChapter: json['latest_chapter'] as String?,
+      updateTime: json['update_time'] as String?,
+      reviewCount: json['review_count'] as int? ?? 0,
+      isSubscribed: json['is_subscribed'] as bool? ?? false,
     );
   }
 

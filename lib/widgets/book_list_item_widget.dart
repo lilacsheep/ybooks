@@ -13,11 +13,11 @@ class BookListItemWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return InkWell( // Wrap with InkWell for tap feedback and handling
       onTap: () {
-        // Navigate to the BookDetailPage, passing the book object
+        // Navigate to the BookDetailPage, passing the full book object
         Navigator.push(
           context,
           MaterialPageRoute(
-            builder: (context) => BookDetailPage(book: book),
+            builder: (context) => BookDetailPage(book: book), // Pass the book object
           ),
         );
       },

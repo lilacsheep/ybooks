@@ -28,10 +28,10 @@ class BookDetailAppBar extends StatelessWidget {
   }
 
   const BookDetailAppBar({
-    Key? key,
+    super.key,
     required this.book,
     required this.onBackPressed,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {

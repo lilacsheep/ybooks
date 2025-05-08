@@ -9,12 +9,12 @@ class BookBottomBar extends StatelessWidget {
   final VoidCallback? onReadBook;
   
   const BookBottomBar({
-    Key? key, 
+    super.key, 
     required this.book,
     this.onSubscribe,
     this.onAudioBook,
     this.onReadBook,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {

@@ -9,12 +9,12 @@ class BookListView extends StatefulWidget {
   final bool hasMore; // Add hasMore state
 
   const BookListView({
-    Key? key,
+    super.key,
     required this.books,
     required this.scrollController,
     required this.isLoading,
     required this.hasMore,
-  }) : super(key: key);
+  });
 
   @override
   _BookListViewState createState() => _BookListViewState();

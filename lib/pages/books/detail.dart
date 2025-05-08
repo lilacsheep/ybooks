@@ -5,7 +5,7 @@ import 'package:ybooks/widgets/books/detail/index.dart';
 
 class BookDetailPage extends StatelessWidget {
   final Book? book;
-  const BookDetailPage({Key? key, this.book}) : super(key: key);
+  const BookDetailPage({super.key, this.book});
 
   @override
   Widget build(BuildContext context) {

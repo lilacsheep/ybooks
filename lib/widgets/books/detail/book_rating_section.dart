@@ -6,8 +6,7 @@ class BookRatingSection extends StatelessWidget {
   final Book? book;
   final VoidCallback? onRatingTap;
 
-  const BookRatingSection({Key? key, required this.book, this.onRatingTap})
-    : super(key: key);
+  const BookRatingSection({super.key, required this.book, this.onRatingTap});
 
   @override
   Widget build(BuildContext context) {

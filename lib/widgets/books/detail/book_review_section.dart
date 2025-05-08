@@ -7,10 +7,10 @@ class BookReviewSection extends StatelessWidget {
   final VoidCallback? onWriteReview;
   
   const BookReviewSection({
-    Key? key, 
+    super.key, 
     required this.book,
     this.onWriteReview,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {

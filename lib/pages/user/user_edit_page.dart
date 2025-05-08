@@ -217,7 +217,7 @@ class _UserEditPageState extends State<UserEditPage> {
             borderRadius: BorderRadius.circular(8.0),
           ),
            filled: true, // Enable fill color
-           fillColor: Theme.of(context).inputDecorationTheme.fillColor ?? Theme.of(context).colorScheme.surfaceVariant.withOpacity(0.2), // Use theme or custom color
+           fillColor: Theme.of(context).inputDecorationTheme.fillColor ?? Theme.of(context).colorScheme.surfaceContainerHighest.withOpacity(0.2), // Use theme or custom color
         ),
         keyboardType: keyboardType,
         // Basic validation example
@@ -273,7 +273,7 @@ class _UserEditPageState extends State<UserEditPage> {
             borderRadius: BorderRadius.circular(8.0),
           ),
            filled: true, // Enable fill color
-           fillColor: Theme.of(context).inputDecorationTheme.fillColor ?? Theme.of(context).colorScheme.surfaceVariant.withOpacity(0.2), // Use theme or custom color
+           fillColor: Theme.of(context).inputDecorationTheme.fillColor ?? Theme.of(context).colorScheme.surfaceContainerHighest.withOpacity(0.2), // Use theme or custom color
            suffixIcon: Icon(Icons.calendar_today), // Add a calendar icon
         ),
         readOnly: true, // Make the field read-only
@@ -316,7 +316,7 @@ class _UserEditPageState extends State<UserEditPage> {
             borderRadius: BorderRadius.circular(8.0),
           ),
           filled: true,
-          fillColor: Theme.of(context).inputDecorationTheme.fillColor ?? Theme.of(context).colorScheme.surfaceVariant.withOpacity(0.2),
+          fillColor: Theme.of(context).inputDecorationTheme.fillColor ?? Theme.of(context).colorScheme.surfaceContainerHighest.withOpacity(0.2),
         ),
         value: _selectedSex,
         hint: const Text('请选择性别'),

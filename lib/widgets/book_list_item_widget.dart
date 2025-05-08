@@ -7,7 +7,7 @@ import 'package:ybooks/pages/books/detail.dart'; // Import BookDetailPage
 class BookListItemWidget extends StatelessWidget {
   final Book book;
 
-  const BookListItemWidget({Key? key, required this.book}) : super(key: key);
+  const BookListItemWidget({super.key, required this.book});
 
   @override
   Widget build(BuildContext context) {
@@ -165,13 +165,13 @@ class BookListItemWidget extends StatelessWidget {
 }
 
 class BookListItemDivider extends StatelessWidget {
-  const BookListItemDivider({Key? key}) : super(key: key);
+  const BookListItemDivider({super.key});
 
   @override
   Widget build(BuildContext context) {
     return const Divider(
       height: 0.3,
-      color: const Color(0xFFE0E0E0), // Changed color to lighter grey (grey[300])
+      color: Color(0xFFE0E0E0), // Changed color to lighter grey (grey[300])
       thickness: 0.5, // Decreased thickness
     );
   }

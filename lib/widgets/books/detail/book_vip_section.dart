@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 class BookVipSection extends StatelessWidget {
   final VoidCallback? onTap;
   
-  const BookVipSection({Key? key, this.onTap}) : super(key: key);
+  const BookVipSection({super.key, this.onTap});
 
   @override
   Widget build(BuildContext context) {

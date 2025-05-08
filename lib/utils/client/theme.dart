@@ -10,9 +10,7 @@ final ThemeData lightTheme = ThemeData(
     secondary: Color(0xFFB71C1C), // 复古红 (Deep Red) - 可选的次要强调色
     onSecondary: Color(0xFFF5F5DC), // 次要强调色上的文字 - 浅米色
     error: Color(0xFFB00020), // 错误颜色
-    onError: Color(0xFFFFFFFF), // 错误颜色上的文字
-    background: Color(0xFFFFFFFF), // 白色 - 主背景色
-    onBackground: Color(0xFF5D4037), // 深棕色 (Deep Brown) - 文本颜色
+    onError: Color(0xFFFFFFFF), // 深棕色 (Deep Brown) - 文本颜色
     surface: Color(0xFFFFFFFF), // 白色 - 组件表面颜色
     onSurface: Color(0xFF5D4037), // 组件表面上的文本颜色，同文本颜色
   ),
@@ -42,9 +40,7 @@ final ThemeData darkTheme = ThemeData(
     secondary: Color(0xFFB71C1C), // 复古红 (Deep Red) - 可选的次要强调色
     onSecondary: Color(0xFFF5F5DC), // 次要强调色上的文字 - 浅米色
     error: Color(0xFFCF6679), // 错误颜色
-    onError: Color(0xFF000000), // 错误颜色上的文字
-    background: Color(0xFF3E2723), // 深棕色 (Deep Brown) - 主背景色
-    onBackground: Color(0xFFF5F5DC), // 浅米色 (Light Beige) - 文本颜色
+    onError: Color(0xFF000000), // 浅米色 (Light Beige) - 文本颜色
     surface: Color(0xFF3E2723), // 组件表面颜色，同背景色
     onSurface: Color(0xFFF5F5DC), // 组件表面上的文本颜色，同文本颜色
   ),

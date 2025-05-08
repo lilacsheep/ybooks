@@ -6,10 +6,10 @@ class CategoryListWidget extends StatefulWidget {
   final Function(int) onCategorySelected;
 
   const CategoryListWidget({
-    Key? key,
+    super.key,
     required this.selectedIndex,
     required this.onCategorySelected,
-  }) : super(key: key);
+  });
 
   @override
   _CategoryListWidgetState createState() => _CategoryListWidgetState();

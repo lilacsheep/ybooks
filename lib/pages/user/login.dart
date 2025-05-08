@@ -6,7 +6,7 @@ import '../../utils/client/http_auth.dart'; // 导入 HttpAuth
 import 'register.dart'; // 导入注册页面
 
 class LoginPage extends flutter_material.StatefulWidget {
-  const LoginPage({flutter_material.Key? key}) : super(key: key);
+  const LoginPage({super.key});
 
   @override
   flutter_material.State<LoginPage> createState() => _LoginPageState();

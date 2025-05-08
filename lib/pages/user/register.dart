@@ -5,7 +5,7 @@ import '../../utils/client/http_auth.dart'; // 导入 HttpAuth
 import 'login.dart'; // 导入登录页面
 
 class RegisterPage extends StatefulWidget {
-  const RegisterPage({Key? key}) : super(key: key);
+  const RegisterPage({super.key});
 
   @override
   State<RegisterPage> createState() => _RegisterPageState();

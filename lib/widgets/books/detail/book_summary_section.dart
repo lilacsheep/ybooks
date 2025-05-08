@@ -8,10 +8,10 @@ class BookSummarySection extends StatelessWidget {
   final VoidCallback? onToggleExpand;
   
   const BookSummarySection({
-    Key? key, 
+    super.key, 
     required this.book,
     this.onToggleExpand,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {

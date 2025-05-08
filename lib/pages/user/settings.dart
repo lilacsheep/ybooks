@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:ybooks/widgets/bottom_app_bar_widget.dart'; // Import the bottom app bar widget, though not used in this page as per the image
 
 class SettingsPage extends StatefulWidget {
-  const SettingsPage({Key? key}) : super(key: key);
+  const SettingsPage({super.key});
 
   @override
   _SettingsPageState createState() => _SettingsPageState();

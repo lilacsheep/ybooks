@@ -3,10 +3,10 @@ import 'package:flutter/material.dart';
 /// A reusable bottom app bar widget with Home, Favorites, and Settings buttons.
 class BottomAppBarWidget extends StatelessWidget {
   const BottomAppBarWidget({
-    Key? key,
+    super.key,
     required this.currentIndex,
     required this.onTap,
-  }) : super(key: key);
+  });
 
   final int currentIndex;
   final void Function(int) onTap;

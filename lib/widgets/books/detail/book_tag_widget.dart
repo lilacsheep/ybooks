@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 class BookTagWidget extends StatelessWidget {
   final String text;
   
-  const BookTagWidget({Key? key, required this.text}) : super(key: key);
+  const BookTagWidget({super.key, required this.text});
 
   @override
   Widget build(BuildContext context) {

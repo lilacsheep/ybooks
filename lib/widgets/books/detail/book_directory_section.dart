@@ -7,10 +7,10 @@ class BookDirectorySection extends StatelessWidget {
   final VoidCallback? onTap;
   
   const BookDirectorySection({
-    Key? key, 
+    super.key, 
     required this.book,
     this.onTap,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {

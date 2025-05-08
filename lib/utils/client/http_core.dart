@@ -49,58 +49,56 @@ dynamic _handleResponse(Response response) {
   }
 
   // If successfully parsed as Map, check business code
-  if (responseMap != null) {
-    // Check for business code, assuming 0 or 200 means success
-    final dynamic code = responseMap['code'];
-    final String message =
-        responseMap['message']?.toString() ?? 'Unknown error';
+  // Check for business code, assuming 0 or 200 means success
+  final dynamic code = responseMap['code'];
+  final String message =
+      responseMap['message']?.toString() ?? 'Unknown error';
 
-    // Example: Check for specific business error code like 401 (adjust code as needed)
-    // if (code == 401) {
-    //     print('Authentication Failed (Business Code $code): $message. Redirecting to login...');
-    //     // Trigger navigation to login page using a global navigator key or other mechanism
-    //     throw Exception('Authentication Failed ($code): $message');
-    // }
+  // Example: Check for specific business error code like 401 (adjust code as needed)
+  // if (code == 401) {
+  //     print('Authentication Failed (Business Code $code): $message. Redirecting to login...');
+  //     // Trigger navigation to login page using a global navigator key or other mechanism
+  //     throw Exception('Authentication Failed ($code): $message');
+  // }
 
-    if (response.statusCode == 401) {
-      // Check for HTTP status code 401
-      print(
-        'Authentication Failed (Status Code 401): $message. Redirecting to login...',
-      );
-      // Trigger navigation to login page using a global navigator key
-      if (HttpCore._navigatorKey?.currentState != null) {
-        print('Navigator key found, attempting redirection to /login...');
-        Navigator.pushAndRemoveUntil(
-              HttpCore._navigatorKey!.currentState!.context,
-              MaterialPageRoute(builder: (context) => const LoginPage()),
-              (Route<dynamic> route) => false,
-            )
-            .then((_) {
-              print('Redirection to login page attempted successfully.');
-            })
-            .catchError((error) {
-              print('Error during navigation to login page: $error');
-            });
-      } else {
-        print('Navigator key not available for redirection.');
-      }
-      // Do NOT throw an exception here if it's a 401 that we are handling by redirecting.
-      // The response data might still be useful information about why the auth failed.
-      return responseMap; // Return the response data even on 401
+  if (response.statusCode == 401) {
+    // Check for HTTP status code 401
+    print(
+      'Authentication Failed (Status Code 401): $message. Redirecting to login...',
+    );
+    // Trigger navigation to login page using a global navigator key
+    if (HttpCore._navigatorKey?.currentState != null) {
+      print('Navigator key found, attempting redirection to /login...');
+      Navigator.pushAndRemoveUntil(
+            HttpCore._navigatorKey!.currentState!.context,
+            MaterialPageRoute(builder: (context) => const LoginPage()),
+            (Route<dynamic> route) => false,
+          )
+          .then((_) {
+            print('Redirection to login page attempted successfully.');
+          })
+          .catchError((error) {
+            print('Error during navigation to login page: $error');
+          });
+    } else {
+      print('Navigator key not available for redirection.');
     }
-
-    if (code != null && code != 0 && code != 200) {
-      // Assuming 0 or 200 indicates success
-      // Business logic error
-      print('_handleResponse: API Logic Error [Code: $code]: $message');
-      throw Exception(
-        message,
-      ); // Throw exception with the business error message
-    }
-
-    // Business success, return the whole Map data
-    return responseMap;
+    // Do NOT throw an exception here if it's a 401 that we are handling by redirecting.
+    // The response data might still be useful information about why the auth failed.
+    return responseMap; // Return the response data even on 401
   }
+
+  if (code != null && code != 0 && code != 200) {
+    // Assuming 0 or 200 indicates success
+    // Business logic error
+    print('_handleResponse: API Logic Error [Code: $code]: $message');
+    throw Exception(
+      message,
+    ); // Throw exception with the business error message
+  }
+
+  // Business success, return the whole Map data
+  return responseMap;
 
   // Fallback (should ideally not be reached if logic above is correct)
   print('_handleResponse: Reached end unexpectedly, returning raw data.');

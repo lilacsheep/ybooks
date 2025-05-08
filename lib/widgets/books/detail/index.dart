@@ -1,4 +1,5 @@
 /// 导出所有书籍详情页组件
+library;
 export 'book_tag_widget.dart';
 export 'book_detail_app_bar.dart';
 export 'book_vip_section.dart';
